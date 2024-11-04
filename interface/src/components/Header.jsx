@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBuildingColumns } from "@fortawesome/free-solid-svg-icons";
+import { NavLink } from "react-router-dom";
 
 // Styled components
 const HeaderContainer = styled.header`
@@ -58,7 +59,7 @@ const Header = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsSticky(window.scrollY > 30);
+      setIsSticky(window.scrollY > 0);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -74,10 +75,11 @@ const Header = () => {
         University Convocation
       </Logo>
       <Nav>
-        <a href="/">Home</a>
-        <a href="/register">Register</a>
-        <a href="/about">About</a>
-        <a href="/contact">Contact</a>
+        <NavLink to="/">Home</NavLink>
+        <NavLink to="/register">Register</NavLink>
+        <NavLink to="/login">Login</NavLink>
+        <NavLink to="/about">About</NavLink>
+        <NavLink to="/contact">Contact</NavLink>
       </Nav>
     </HeaderContainer>
   );
