@@ -42,6 +42,9 @@ const loginUser = async (req, res) => {
       { expiresIn: "1h" } // Token expiration time
     );
 
+    // Set the token in an HTTP-only cookie
+    res.cookie("token", token, { httpOnly: true });
+
     return res.status(200).json({
       message: "Login successful",
       token, // Return token for authorization in frontend
@@ -58,7 +61,7 @@ const loginUser = async (req, res) => {
 
 // Logout
 const logoutUser = (req, res) => {
-  console.log("server logout");
+  //console.log("server logout");
   res.cookie("token", "", { expires: new Date(0) });
   return res.status(200).json({ message: "Logout successful" });
 };

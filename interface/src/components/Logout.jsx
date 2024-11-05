@@ -23,7 +23,7 @@ const Logout = () => {
 
   const handleLogout = async () => {
     try {
-      console.log("handle logout");
+      //console.log("handle logout");
       // Call your backend to invalidate the token
       await axios.post("http://localhost:5000/user/logout");
 
