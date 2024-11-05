@@ -132,7 +132,7 @@ const Login = () => {
         );
         // setSuccessMessage(response.data.message);
 
-        login(response.data.user); // Store user info in context
+        login(response.data.token, response.data.user); // Store user info in context
         navigate("/user/dashboard");
         // Redirect user or perform other actions upon successful login
       } catch (error) {

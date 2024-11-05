@@ -1,10 +1,12 @@
-// frontend/src/components/Header.js
+// src/components/Header.js
 
 import React, { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBuildingColumns } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
+import Logout from "./Logout";
+import { useAuth } from "../contexts/UserContext"; // Import the useAuth hook
 
 // Styled components
 const HeaderContainer = styled.header`
@@ -56,6 +58,7 @@ const Nav = styled.nav`
 // Main Header component
 const Header = () => {
   const [isSticky, setIsSticky] = useState(false);
+  const { authState } = useAuth(); // Access authState from UserContext
 
   useEffect(() => {
     const handleScroll = () => {
@@ -76,10 +79,20 @@ const Header = () => {
       </Logo>
       <Nav>
         <NavLink to="/">Home</NavLink>
-        <NavLink to="/register">Register</NavLink>
-        <NavLink to="/login">Login</NavLink>
         <NavLink to="/about">About</NavLink>
         <NavLink to="/contact">Contact</NavLink>
+        {!authState.token ? ( // Check if the user is not authenticated
+          <>
+            <NavLink to="/register">Register</NavLink>
+            <NavLink to="/login">Login</NavLink>
+          </>
+        ) : (
+          // User is authenticated
+          <>
+            <NavLink to="/user/dashboard">Dashboard</NavLink>
+            <Logout /> {/* Render the Logout component */}
+          </>
+        )}
       </Nav>
     </HeaderContainer>
   );
